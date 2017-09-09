@@ -29,13 +29,8 @@ export default class UploadScreen extends Component {
       <View style={styles.container}>
       {image &&
         <Image source={{ uri: image }} style={{ width: 350, height: 520 }} />}
-        <Button
-          title="Pick a page to translate"
-          color="#61b3e2"
-          onPress={this._pickImage}
-        />
         <ActionButton buttonColor="rgba(231,76,60,1)">
-          <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => {}}>
+          <ActionButton.Item buttonColor='#9b59b6' title="Upload" onPress={this._pickImage}>
             <Ionicons name="md-create" size={32} color="white" />
           </ActionButton.Item>
           <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
