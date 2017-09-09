@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import { ImagePicker } from 'expo';
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
+
+import { Ionicons } from '@expo/vector-icons';
 
 export default class UploadScreen extends Component {
   state = {
@@ -35,13 +36,13 @@ export default class UploadScreen extends Component {
         />
         <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => {}}>
-            <Icon name="md-create" style={styles.actionButtonIcon} />
+            <Ionicons name="md-create" size={32} color="white" />
           </ActionButton.Item>
           <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
-            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
+            <Ionicons name="md-notifications-off" size={32} color="white" />
           </ActionButton.Item>
           <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
-            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+            <Ionicons name="md-done-all" size={32} color="white" />
           </ActionButton.Item>
           buttonColor="rgba(231,76,60,1)"
         </ActionButton>
