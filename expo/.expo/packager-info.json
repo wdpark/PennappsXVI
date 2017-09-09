@@ -1,16 +1,8 @@
 {
   "expoServerPort": 19000,
-<<<<<<< HEAD
-  "packagerPort": 19001,
-  "packagerPid": 55098,
-  "expoServerNgrokUrl": "https://gt-t9a.danielezhu.expo.exp.direct",
-  "packagerNgrokUrl": "https://packager.gt-t9a.danielezhu.expo.exp.direct",
-  "ngrokPid": 55205
-=======
   "packagerPort": 19003,
   "packagerPid": 9795,
   "expoServerNgrokUrl": "https://gt-t9a.wdpark.expo.exp.direct",
   "packagerNgrokUrl": "https://packager.gt-t9a.wdpark.expo.exp.direct",
   "ngrokPid": 9814
->>>>>>> 9243123cb27f89a9a8323e5e6a215393f1e75e2e
 }
