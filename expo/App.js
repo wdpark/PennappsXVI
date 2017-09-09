@@ -10,34 +10,66 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ImagePicker } from 'expo';
+import { ImagePicker, Permissions, Camera } from 'expo';
 import ActionButton from 'react-native-action-button';
+import * as camera from './screens/CameraScreen.js'
 
 import { Ionicons } from '@expo/vector-icons';
 
 export default class Main extends Component {
   state = {
     image: null,
+    hasCameraPermission: null,
   };
   static navigationOptions = {
     header: null,
   };
 
+  async componentWillMount() {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA);
+      this.setState({ hasCameraPermission: status === 'granted' });
+  }
+
   render() {
+    const { hasCameraPermission } = this.state;
+    if (hasCameraPermission === null) {
+        return <View />;
+    } else if (hasCameraPermission === false) {
+        return <Text>No access to camera</Text>;
+    } else {
+        return (
+            <View style={{ flex: 1 }}>
+            <Camera style={{ flex: 1 }} type={this.state.type}>
+            <View
+            style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+            }}>
+
+            </View>
+            </Camera>
+            </View>
+        );
+    }
+
     let { image } = this.state;
     return (
       <View style={styles.container}>
       {image &&
         <Image source={{ uri: image }} style={{ width: 350, height: 520 }} />}
         <ActionButton buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item buttonColor='#3498db' title="Manual" onPress={() => {}}>
+              <Ionicons name="ios-brush" size={32} color="white" />
+          </ActionButton.Item>
           <ActionButton.Item buttonColor='#9b59b6' title="Upload" onPress={this._pickImage}>
-            <Ionicons name="md-create" size={32} color="white" />
+            <Ionicons name="md-cloud-upload" size={32} color="white" />
           </ActionButton.Item>
-          <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
-            <Ionicons name="md-notifications-off" size={32} color="white" />
+          <ActionButton.Item buttonColor='#3498db' title="Camera" onPress={() => {}}>
+            <Ionicons name="ios-camera" size={32} color="white" />
           </ActionButton.Item>
-          <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
-            <Ionicons name="md-done-all" size={32} color="white" />
+          <ActionButton.Item buttonColor='#1abc9c' title="Translate" onPress={() => {}}>
+            <Ionicons name="md-swap" size={32} color="white" />
           </ActionButton.Item>
           buttonColor="rgba(231,76,60,1)"
         </ActionButton>
