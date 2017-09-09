@@ -1,46 +1,83 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Image,
   Platform,
+  Button,
   ScrollView,
   StyleSheet,
   Text,
+  Font,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { DocumentPicker } from 'expo';
+import { ImagePicker } from 'expo';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-import { MonoText } from '../components/StyledText';
-
-export default class HomeScreen extends React.Component {
+export default class UploadScreen extends Component {
+  state = {
+    image: null,
+  };
   static navigationOptions = {
     header: null,
   };
 
   render() {
+    let { image } = this.state;
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
+      {image &&
+        <Image source={{ uri: image }} style={{ width: 350, height: 520 }} />}
+        <Button
+          title="Pick a page to translate"
+          color="#61b3e2"
+          onPress={this._pickImage}
+        />
+        <ActionButton buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => {}}>
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
+            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
+            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          buttonColor="rgba(231,76,60,1)"
+        </ActionButton>
 
-            <Text style={styles.getStartedText}>
-              reee
-
-            </Text>
-
-        </ScrollView>
       </View>
+
     );
   }
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: false,
 
-  }
+    });
 
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+}
 
 const styles = StyleSheet.create({
+
+  actionButtonIcon: {
+  fontSize: 20,
+  height: 22,
+  color: 'white',
+  fontFamily: 'Ionicons'
+  },
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   developmentModeText: {
     marginBottom: 20,
