@@ -18,7 +18,15 @@ export default class HomeScreen extends React.Component {
     };
     state = {
         hasCameraPermission: null,
-        imageUri: ''
+        type: Camera.Constants.Type.back
+    }
+
+    takePicture = () => {
+        if (this.camera) {
+            this.camera.takePictureAsync()
+            .then((data) => console.log(data))
+            .catch(err => console.error(err));
+        }
     }
 
     async componentWillMount() {
@@ -35,7 +43,7 @@ export default class HomeScreen extends React.Component {
         } else {
             return (
                 <View style={{ flex: 1 }}>
-                <Camera style={{ flex: 1 }} type={this.state.type}>
+                <Camera ref={ref => { this.camera = ref; }} style={{ flex: 1 }} type={this.state.type}>
                 <View
                 style={{
                     flex: 1,
@@ -62,7 +70,13 @@ export default class HomeScreen extends React.Component {
                 </TouchableOpacity>
                 </View>
                 </Camera>
+                <View style={[styles.overlay, styles.bottomOverlay]}>
+                <TouchableOpacity style={styles.captureButton} onPress={this.takePicture}/>
                 </View>
+
+                </View>
+
+
             );
         }
     }
@@ -156,5 +170,31 @@ const styles = StyleSheet.create({
     helpLinkText: {
         fontSize: 14,
         color: '#2e78b7',
+    },
+    overlay: {
+        position: 'absolute',
+        padding: 16,
+        right: 0,
+        left: 0,
+        alignItems: 'center',
+    },
+    topOverlay: {
+        top: 0,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    bottomOverlay: {
+        bottom: 0,
+        backgroundColor: 'transparent',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    captureButton: {
+      padding: 25,
+      backgroundColor: 'white',
+      borderRadius: 45,
     },
 });
