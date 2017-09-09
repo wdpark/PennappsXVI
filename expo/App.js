@@ -30,6 +30,9 @@ export default class Main extends Component {
     let { image } = this.state;
     return (
       <View style={styles.container}>
+
+      <Image source={require('./assets/images/nitori.png')} resizeMode={'contain'} style={{width: 350, height: 500, flex: 1}}/>
+
       {image &&
         <Image source={{ uri: image }} style={{ width: 350, height: 520 }} />}
         <ActionButton buttonColor="rgba(50,187,231,1)">
@@ -68,6 +71,8 @@ export default class Main extends Component {
 
 const styles = StyleSheet.create({
 
+
+
   actionButtonIcon: {
   fontSize: 20,
   height: 22,
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#82C057',
     alignItems: 'center',
     justifyContent: 'center',
   },
