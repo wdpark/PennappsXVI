@@ -1,18 +1,8 @@
 {
-<<<<<<< HEAD
   "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://gt-t9a.wdpark.expo.exp.direct",
+  "packagerNgrokUrl": "https://packager.gt-t9a.wdpark.expo.exp.direct",
+  "ngrokPid": 11291,
   "packagerPort": 19003,
-  "packagerPid": 9795,
-  "expoServerNgrokUrl": "https://gt-t9a.wdpark.expo.exp.direct",
-  "packagerNgrokUrl": "https://packager.gt-t9a.wdpark.expo.exp.direct",
-  "ngrokPid": 9814
+  "packagerPid": 11273
 }
-=======
-  "expoServerPort": 19004,
-  "packagerPort": 19005,
-  "packagerPid": 10412,
-  "expoServerNgrokUrl": "https://gt-t9a.wdpark.expo.exp.direct",
-  "packagerNgrokUrl": "https://packager.gt-t9a.wdpark.expo.exp.direct",
-  "ngrokPid": 10427
-}
->>>>>>> 5e0cddda52af5c50d5c34fef1bcf882f5c70f271
