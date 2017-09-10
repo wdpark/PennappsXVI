@@ -84,7 +84,7 @@ class Kero extends Component {
 
 
   handleSubmit() {
-    fetch('https://39e57557.ngrok.io/pstimgmob', {
+    fetch('https://b5e7152f.ngrok.io/pstimgmob', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
