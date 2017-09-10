@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ImagePicker } from 'expo';
+import { ImagePicker, FileSystem } from 'expo';
 import ActionButton from 'react-native-action-button';
 
 
@@ -19,6 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 export default class Main extends Component {
   state = {
     image: null,
+    base64: null,
   };
   static navigationOptions = {
     header: null,
@@ -30,6 +31,9 @@ export default class Main extends Component {
     let { image } = this.state;
     return (
       <View style={styles.container}>
+
+      <Image source={require('./assets/images/nitori.png')} resizeMode={'contain'} style={{width: 350, height: 500, flex: 1}}/>
+
       {image &&
         <Image source={{ uri: image }} style={{ width: 350, height: 520 }} />}
         <ActionButton buttonColor="rgba(50,187,231,1)">
@@ -42,7 +46,7 @@ export default class Main extends Component {
           <ActionButton.Item buttonColor='#32D4E7' title="Camera" onPress={() => {}}>
             <Ionicons name="ios-camera" size={32} color="white" />
           </ActionButton.Item>
-          <ActionButton.Item buttonColor='#38CF7F' title="Translate" onPress={() => {}}>
+          <ActionButton.Item buttonColor='#38CF7F' title="Translate" onPress={() => this.handleSubmit()}>
             <Ionicons name="md-swap" size={32} color="white" />
           </ActionButton.Item>
           buttonColor="rgba(50,187,231,1)"
@@ -55,18 +59,40 @@ export default class Main extends Component {
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: false,
-
+      base64: true
     });
 
     console.log(result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
+      this.setState({ data: result.base64 });
     }
   };
+
+
+
+  handleSubmit() {
+    fetch('https://646b3028.ngrok.io/pstimgmob', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: this.state.data,
+        })
+      })
+      .then(response => {
+        this.setState({ image: 'data:image/png;base64,'+response["_bodyText"] });
+      });
+
+    }
 }
 
 const styles = StyleSheet.create({
+
+
 
   actionButtonIcon: {
   fontSize: 20,
@@ -77,7 +103,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#82C057',
     alignItems: 'center',
     justifyContent: 'center',
   },
